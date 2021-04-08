@@ -11,7 +11,10 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--backbone', type=str, default="resnet50")
     parser.add_argument('--download', type=bool, default=True)
-    parser.add_argument('--data_dir', type=str, default=os.getcwd())
+    parser.add_argument('--train_folder', type=str, default=os.path.join(os.getcwd(),
+                        "data/coco128/images/train2017/"))
+    parser.add_argument('--train_ann_file', type=str, default=os.path.join(os.getcwd(),
+                        "data/coco128/annotations/instances_train2017.json"))
     parser.add_argument('--max_epochs', type=int, default=1)
     parser.add_argument('--learning_rate', type=float, default=1e-3)
     parser.add_argument('--gpus', type=int, default=None)
@@ -21,12 +24,12 @@ if __name__ == '__main__':
     if args.download:
         # Dataset Credit: https://www.kaggle.com/ultralytics/coco128
         download_data("https://github.com/zhiqwang/yolov5-rt-stack/releases/download/v0.3.0/coco128.zip", 
-                    os.path.join(args.data_dir, "data/"))
+                      os.path.join(os.getcwd(), "data/"))
 
     # 2. Load the Data
     datamodule = ObjectDetectionData.from_coco(
-        train_folder=os.path.join(args.data_dir, "data/coco128/images/train2017/"),
-        train_ann_file=os.path.join(args.data_dir, "data/coco128/annotations/instances_train2017.json"),
+        train_folder=args.train_folder,
+        train_ann_file=args.train_ann_file,
         batch_size=2
     )
 
