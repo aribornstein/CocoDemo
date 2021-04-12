@@ -1,2 +1,2 @@
-lightning-flash
+lightning-flash=0.2.2
 nltk!=3.6
