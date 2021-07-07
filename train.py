@@ -2,8 +2,8 @@
 import flash
 import os
 from argparse import ArgumentParser
-from flash.core.data import download_data
-from flash.vision import ObjectDetectionData, ObjectDetector
+from flash.core.data.utils import download_data
+from flash.image import ObjectDetectionData, ObjectDetector
 
 
 if __name__ == '__main__':
